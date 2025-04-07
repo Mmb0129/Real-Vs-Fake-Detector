@@ -1,6 +1,6 @@
 # 🧠 GenOrNot – Real vs AI-Generated Image Detector
 
-**GenOrNot** is a hybrid machine learning project designed to classify images as either **real** (captured by a camera) or **AI-generated** (created using tools like DALL·E, MidJourney, or Craiyon). It implements **two pipelines**: one using **handcrafted image features + PCA + Logistic Regression**, and another using **deep features extracted via VGG16 + SVM**. The final model is deployed on a **Flask web app hosted on AWS**.
+**GenOrNot** is a hybrid machine learning project designed to classify images as either **real** (captured by a camera) or **AI-generated** (created using tools like DALL·E, MidJourney, or Craiyon). It implements **two pipelines**: one using **handcrafted image features + PCA + Logistic Regression / Random Forest / KMeans / GMM / SVM**, and another using **deep features extracted via VGG16 + SVM**. The final model is deployed on a **Flask web app hosted on AWS**.
 
 ---
 
@@ -47,7 +47,7 @@ Generative AI is advancing rapidly, making it harder to distinguish real photos 
 
 The project uses **two complementary pipelines**:
 
-1. **Pipeline 1** – Handcrafted features (color, edge, texture)
+1. **Pipeline 1** – Handcrafted features using (color, edge, texture)
 2. **Pipeline 2** – Deep features using VGG16
 
 Both approaches are evaluated to compare performance.
@@ -58,6 +58,12 @@ Both approaches are evaluated to compare performance.
 
 1. **Feature Engineering**:
    - Extracted color histograms, Haralick texture features, edge density, and contour-related properties
+   - LBP (Local Binary Pattern):
+      Captures the texture of the grayscale version of the image by comparing the intensity of each pixel with its surrounding neighbors. LBP is rotation-invariant and efficient for texture classification.
+
+   - FFT (Fast Fourier Transform):
+      Converts the image into the frequency domain and extracts global frequency patterns. Real images and AI-generated ones often differ in the distribution of frequency components.
+
 2. **Dimensionality Reduction**:
    - Applied PCA to reduce noise and compress features
 3. **Classifier**:
